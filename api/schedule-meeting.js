@@ -1,23 +1,22 @@
 const nodemailer = require("nodemailer");
 
 module.exports = async (req, res) => {
-  if (req.method !== "GET") {
+  if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
 
-  // Extract parameters from query string
-  const { name, email, date_time } = req.query;
+  const { name, email, date_time } = req.body;
 
   if (!name || !email || !date_time) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
-  // Configure Nodemailer
+  // Configure Nodemailer with environment variables
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS, // Set in environment variables
+      user: process.env.EMAIL_USER, // Set in Vercel environment variables
+      pass: process.env.EMAIL_PASS, // Set in Vercel environment variables
     },
   });
 
