@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL_USER, // Set in environment variables
+      user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS, // Set in environment variables
     },
   });
